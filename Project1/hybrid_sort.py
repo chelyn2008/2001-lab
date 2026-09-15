@@ -1,32 +1,40 @@
 def HybridMergeSort(A, left, right, S):
     size = right - left + 1
     if size <= S:
-        InsertionSort(A, left, right)
+        return InsertionSort(A, left, right)
+        return insertion_comparisons
     else:
         mid = (left + right) // 2
         # recursive calls for MergeSort
-        HybridMergeSort(A, left, mid, S)
-        HybridMergeSort(A, mid + 1, right, S)
+        left_comparisons = HybridMergeSort(A, left, mid, S)
+        right_comparisons = HybridMergeSort(A, mid + 1, right, S)
 
-        Merge(A, left, mid, right)
+        merge_comparisons = Merge(A, left, mid, right)
 
+        return left_comparisons + right_comparisons + merge_comparisons
 def InsertionSort(A, left, right):
+    comparisons = 0
     for i in range(left+1, right+1): # python does not include last value, so want right to be included
         key = A[i]
         j = i-1
-        while j >= left and A[j] > key: # checking if the value is bigger than the one before it
-            A[j + 1] = A[j]
-            j -= 1 # shifting j to the right
+        while j >= left: # checking if the value is bigger than the one before it
+            comparisons += 1
+            if A[j] > key:
+                A[j + 1] = A[j]
+                j -= 1 # shifting j to the right
 
         A[j + 1] = key
+    return comparisons
 
 def Merge(A, left, mid, right):
+    comparisons = 0
     # python slicing 
     L = A[left:mid+1]
     R = A[mid+1:right+1]
     i = j = 0  # initialise starting pointers
     k = left # starting point
     while i < len(L) and j < len(R):
+        comparisons += 1
         if L[i] <= R[j]:
             A[k] = L[i]
             i += 1
@@ -48,3 +56,5 @@ def Merge(A, left, mid, right):
         A[k] = R[j]
         j += 1
         k += 1
+
+    return comparisons
