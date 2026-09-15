@@ -21,7 +21,7 @@ def InsertionSort(A, left, right):
             if A[j] > key:
                 A[j + 1] = A[j]
                 j -= 1 # shifting j to the right
-            else:
+            else: # value is not bigger than the one on the right
                 break
 
         A[j + 1] = key
