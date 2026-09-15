@@ -2,7 +2,6 @@ def HybridMergeSort(A, left, right, S):
     size = right - left + 1
     if size <= S:
         return InsertionSort(A, left, right)
-        return insertion_comparisons
     else:
         mid = (left + right) // 2
         # recursive calls for MergeSort
@@ -22,6 +21,8 @@ def InsertionSort(A, left, right):
             if A[j] > key:
                 A[j + 1] = A[j]
                 j -= 1 # shifting j to the right
+            else:
+                break
 
         A[j + 1] = key
     return comparisons
