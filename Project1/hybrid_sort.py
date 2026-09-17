@@ -1,8 +1,9 @@
 def HybridMergeSort(A, left, right, S):
-    size = right - left + 1
-    if size <= S:
-        return InsertionSort(A, left, right)
+    size = right - left + 1 # size of the array
+    if size <= S: # size smaller than a certain set value
+        return InsertionSort(A, left, right) # use Insertion sort
     else:
+        # MergeSort
         mid = (left + right) // 2
         # recursive calls for MergeSort
         left_comparisons = HybridMergeSort(A, left, mid, S)
@@ -11,6 +12,7 @@ def HybridMergeSort(A, left, right, S):
         merge_comparisons = Merge(A, left, mid, right)
 
         return left_comparisons + right_comparisons + merge_comparisons
+
 def InsertionSort(A, left, right):
     comparisons = 0
     for i in range(left+1, right+1): # python does not include last value, so want right to be included
